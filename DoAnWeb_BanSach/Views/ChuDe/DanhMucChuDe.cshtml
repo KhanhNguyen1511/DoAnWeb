@@ -1,0 +1,13 @@
+﻿@using DoAnWeb_BanSach.Models;
+@model List<ChuDe>
+@{
+    ViewBag.Title = "DanhMucChuDe";
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <a id="btnChuDe" style="width: 250px; font-size:11pt; color:aliceblue; background-color:#0055bd; text-decoration:none" href="@Url.Action("SachTheochuDe",new { @MaChuDe=item.MaChuDe })" class="button button-submit">@item.TenChuDe</a>
+    <br />
+}
+

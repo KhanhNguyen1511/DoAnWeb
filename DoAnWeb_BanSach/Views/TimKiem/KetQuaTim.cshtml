@@ -1,0 +1,44 @@
+﻿@using DoAnWeb_BanSach.Models;
+@model List<Sach>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "KetQuaTim";
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+}
+
+<h2>Kết quả tìm kiếm</h2>
+
+<div id="divBody">
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <div id="SanPham">
+            <a href="@Url.Action("XemChiTiet","Sach", new { @MaSach=item.MaSach})"> <div id="AnhBia"><img src="@Url.Content("~/AnhSP/"+item.AnhBia)" width="100" height="150" /></div></a>
+            <div id="ThongTin">
+                @if (item.TenSach.Length < 35)
+                {
+                    <div id="TenSach" title="@item.TenSach">@item.TenSach</div>
+                }
+                else
+                {
+                    <div id="TenSach" title="@item.TenSach">@item.TenSach.Substring(0, 35)...</div>
+                }
+                <div id="DonGia" style="color:orange"><font color="Green">Giá: </font>@item.GiaBan.Value.ToString("#,##") VND</div>
+            </div>
+            <div id="GioHang">
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.MaSach, @strURL = Request.Url.ToString() }))
+                {
+                    <input type="submit" value="Mua hàng &#xf07a;" id="btnGioHang" class="btn btn-primary" />
+                }
+            </div>
+        </div>
+        if (i % 3 == 0)
+        {
+            <div style="clear:both"></div>
+        }
+
+    }
+</div>
+<div style="clear:both"></div>

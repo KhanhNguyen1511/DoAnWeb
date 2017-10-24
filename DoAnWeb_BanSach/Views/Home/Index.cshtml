@@ -1,0 +1,52 @@
+﻿@using DoAnWeb_BanSach.Models;
+@model List<Sach>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+@{
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+@section NoiDungBenPhai{
+    <div>
+        Cập nhật những mẫu thiết kế đẹp và lạ mắt cho mọi người chiêm ngưỡng và còm-men (comment- bình luận) .
+        Hướng dẫn , truyền bá ” nội công thâm hậu ” có được nhờ tiếp thu tinh hoa mọi miền cho các bạn mới bắt đầu giúp các bạn ý hiểu rõ hơn về Web Designer  :3
+        Đọc sơ qua thấy hơi bị đuối nhưng mình sẽ cố gắng làm hết sức để thực hiện những điều mà trong tờ di chúc….ý lộn tờ giấy của bạn Nguyên đã đưa cho mình và dĩ nhiên mình cũng sẽ cần đến sự giúp đỡ của tất cả các bạn để cùng nhau xây dựng nên một đế chế hùng mạnh dành riêng cho các bạn thích thiết kế web :)
+
+    </div>
+    }
+@* div body cho trang index*@
+<div id="divBody">
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        i++;
+        <div id="SanPham">
+            <a href="@Url.Action("XemChiTiet","Sach", new { @MaSach=item.MaSach})"> <div id="AnhBia"><img src="@Url.Content("~/AnhSP/"+item.AnhBia)" width="100" height="150" /></div></a>
+            <div id="ThongTin">
+                @if (item.TenSach.Length < 35)
+                {
+                    <div id="TenSach" title="@item.TenSach">@item.TenSach</div>
+                }
+                else
+                {
+                    <div id="TenSach"title="@item.TenSach">@item.TenSach.Substring(0,35)...</div>
+                }
+                <div id="DonGia"style="color:orange"><font color="Green">Giá: </font>@item.GiaBan.Value.ToString("#,##") VND</div>
+            </div>
+            <div id="GioHang">
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.MaSach, @strURL = Request.Url.ToString() }))
+                {
+                    <input type="submit" value="Mua hàng &#xf07a;" id="btnGioHang" class="btn btn-primary" />
+                }
+            </div>
+        </div>
+        if (i % 3 == 0)
+        {
+            <div style="clear:both"></div>
+        }
+
+    }
+</div>
+<div style="clear:both"></div>
+
+
+

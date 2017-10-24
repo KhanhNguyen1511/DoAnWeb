@@ -1,0 +1,65 @@
+﻿@using DoAnWeb_BanSach.Models;
+@model Sach
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/UserLayout.cshtml";
+}
+
+<style>
+    #divNoiDungBenPhai{
+        display:none;
+    }
+    #divMenuBenTrai{
+        display:none;
+    }
+</style>
+@section NoiDungBenPhai{
+    <div id="HinhAnh">
+        <img src="@Url.Content("~/AnhSP"+Model.AnhBia)" />
+    </div>
+
+    <div id="ThongTin">
+        <div id="TenSach">@Model.TenSach</div>
+        <div id="ChuDe">Chủ đề: @ViewBag.TenChuDe</div>
+        <div id="NhaXuatBan">Nhà xuất bản: @ViewBag.NhaXB</div>
+        <div id="Gia"><span style="color:green;font-weight:normal">Đơn giá:</span><br /><span id="Gia">@Model.GiaBan.Value.ToString("#,##")  VND</span></div>
+        <br />
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = Model.MaSach, @strURL = Request.Url.ToString() }))
+        {
+            <input type="submit" value="Mua hàng &#xf07a;" id="btnGioHang" class="btn btn-primary" />
+        }
+    </div>
+    <div style="clear:both"></div>
+    }
+<style>
+    #HinhAnh{
+        float:left;
+    }
+    #ThongTin{
+        float:left;
+        width:600px;
+    }
+    #TenSach{
+        font-weight:normal;
+        font-size:20pt;
+        height:auto;
+        word-wrap:break-word;
+        color:red;
+    }
+    #ChuDe, #NhaXuatBan{
+        font-size:15pt;
+        font-weight:normal;
+        color:black;
+        height:auto;
+    }
+    #Gia span#Gia{
+        font-weight:normal;
+        color:orange;
+        font-size:25pt;
+        height:auto;
+    }
+    #btnGioHang{
+        font-family:"FontAwsome","Segoe UI";
+        background-color:red;
+    }
+</style>
